@@ -12,19 +12,14 @@
     <groupId>com.xindong.accounting</groupId>
     <artifactId>xd-service-account-api</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>com.xindong.accounting</groupId>
+            <artifactId>xd-service-account-common</artifactId>
+        </dependency>
         <dependency>
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

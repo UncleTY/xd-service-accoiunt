@@ -11,9 +11,27 @@
 
     <artifactId>xd-service-account-infrastucture</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.xindong.accounting</groupId>
+            <artifactId>xd-service-account-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xindong.accounting</groupId>
+            <artifactId>xd-service-account-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xindong.accounting</groupId>
+            <artifactId>xd-service-account-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

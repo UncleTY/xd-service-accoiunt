@@ -1,4 +1,4 @@
-package com.xindong.accounting;
+package com.xindong.accounting.dataobject.response;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;

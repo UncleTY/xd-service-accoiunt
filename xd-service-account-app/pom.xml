@@ -19,7 +19,19 @@
     <dependencies>
         <dependency>
             <groupId>com.xindong.accounting</groupId>
+            <artifactId>xd-service-account-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xindong.accounting</groupId>
             <artifactId>xd-service-account-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xindong.accounting</groupId>
+            <artifactId>xd-service-account-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xindong.accounting</groupId>
+            <artifactId>xd-service-account-infrastucture</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -30,16 +42,34 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <!-- JWT -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+        </dependency>
+        <!--poi-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+        </dependency>
+        <dependency>
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-base</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.afterturn</groupId>
-            <artifactId>easypoi-web</artifactId>
+            <artifactId>easypoi-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.afterturn</groupId>
-            <artifactId>easypoi-annotation</artifactId>
+            <artifactId>easypoi-web</artifactId>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
