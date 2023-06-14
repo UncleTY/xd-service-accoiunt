@@ -1,0 +1,19 @@
+package com.xindong.account.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CheckResultDTO implements Serializable {
+
+	private String fileUrl;
+
+
+	private List<AccDetailDTO> checkResults;
+}

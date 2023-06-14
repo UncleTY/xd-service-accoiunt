@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.20.147.216:33061/ty?useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: 123456
+
+server:
+  ip: 127.0.0.1
+  port: 8082
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+files:
+  upload:
+#    上传文件存放的位置
+    path: D:/files/
+#    path: /home/files
+  template: 比较模板.xlsx
