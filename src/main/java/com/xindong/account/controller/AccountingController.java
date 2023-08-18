@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.xindong.account.common.Result;
+import com.xindong.account.converter.AccountConverter;
 import com.xindong.account.dto.AccountingDetailDTO;
 import com.xindong.account.dto.SplitDTO;
 import com.xindong.account.dto.SplitDetailDTO;
@@ -110,6 +111,7 @@ public class AccountingController {
 					SplitDetailDTO splitResult = getSplitResult(item.getData());
 					return splitResult;
 				}).collect(Collectors.toList());
+		List<SplitDetailDTO> storeResult = AccountConverter.INSTANCE.toSplitDeatilList(resultList);
 		Workbook workbook = ExcelExportUtil.exportExcel(
 				new ExportParams(null, null, "处理结果"),
 				SplitDetailDTO.class,
@@ -123,7 +125,7 @@ public class AccountingController {
 		FileOutputStream fos = new FileOutputStream(filePath + fileName);
 		workbook.write(fos);
 		fos.close();
-		return Result.success(new SplitResultDTO("http://" + serverIp + ":8082/file/" + fileName, resultList));
+		return Result.success(new SplitResultDTO("http://" + serverIp + ":8082/file/" + fileName, storeResult));
 	}
 
 	private SplitDetailDTO getSplitResult(String message) {
