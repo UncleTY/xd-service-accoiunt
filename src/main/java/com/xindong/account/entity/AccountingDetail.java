@@ -3,7 +3,6 @@ package com.xindong.account.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,8 +14,7 @@ import java.math.BigDecimal;
  */
 @Data
 @TableName("t_accounting_detail")
-@AllArgsConstructor
-public class AccDetail {
+public class AccountingDetail {
 
     @TableId(type = IdType.AUTO)
     private Long id;

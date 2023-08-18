@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CheckResultDTO implements Serializable {
+public class SplitResultDTO implements Serializable {
 
 	private String fileUrl;
 
-	private List<AccountingDetailDTO> checkResults;
+	private List<SplitDetailDTO> splitDetailList;
 }

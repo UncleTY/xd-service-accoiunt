@@ -12,12 +12,11 @@ import lombok.Data;
  */
 @Data
 @TableName("t_accounting_group")
-public class AccGroup {
+public class AccountingGroup {
 
     @TableId(type = IdType.AUTO)
     private Long id;
     private Integer date;
-    private Integer time;
     private Integer markFlag;
     private String remark;
 }

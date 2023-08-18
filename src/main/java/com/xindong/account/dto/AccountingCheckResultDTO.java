@@ -7,11 +7,11 @@ import java.util.List;
 
 @Data
 @ToString
-public class AccCheckResultDTO {
+public class AccountingCheckResultDTO {
 
 	private Long id;
 	private Integer date;
 	private Integer markFlag;
 	private String remark;
-	private List<AccDetailDTO> detailList;
+	private List<AccountingDetailDTO> detailList;
 }

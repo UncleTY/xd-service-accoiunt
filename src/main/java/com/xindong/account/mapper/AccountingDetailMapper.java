@@ -1,7 +1,7 @@
 package com.xindong.account.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xindong.account.entity.AccDetail;
+import com.xindong.account.entity.AccountingDetail;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description:
  */
 @Mapper
-public interface AccDetailMapper extends BaseMapper<AccDetail> {
+public interface AccountingDetailMapper extends BaseMapper<AccountingDetail> {
 
 }

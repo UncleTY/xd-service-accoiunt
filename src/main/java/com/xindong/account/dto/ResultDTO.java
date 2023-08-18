@@ -19,4 +19,37 @@ public class ResultDTO implements Serializable {
 
 	@Excel(name = "金额差额", orderNum = "4", type = 10)
 	private String diffBalance;
+
+
+	public String getSubjectNo() {
+		return subjectNo;
+	}
+
+	public void setSubjectNo(String subjectNo) {
+		this.subjectNo = subjectNo;
+	}
+
+	public String getSubjectBalance() {
+		return subjectBalance;
+	}
+
+	public void setSubjectBalance(String subjectBalance) {
+		this.subjectBalance = subjectBalance;
+	}
+
+	public String getDetailBalance() {
+		return detailBalance;
+	}
+
+	public void setDetailBalance(String detailBalance) {
+		this.detailBalance = detailBalance;
+	}
+
+	public String getDiffBalance() {
+		return diffBalance;
+	}
+
+	public void setDiffBalance(String diffBalance) {
+		this.diffBalance = diffBalance;
+	}
 }

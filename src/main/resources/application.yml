@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://10.20.147.216:33061/ty?useUnicode=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:mysql://124.220.24.28:3306/xd?useUnicode=true&characterEncoding=utf8&useSSL=true
     username: root
     password: 123456
 
@@ -19,4 +19,3 @@ files:
 #    上传文件存放的位置
     path: D:/files/
 #    path: /home/files
-  template: 比较模板.xlsx

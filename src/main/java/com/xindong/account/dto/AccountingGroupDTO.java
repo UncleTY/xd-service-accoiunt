@@ -8,7 +8,7 @@ import lombok.Data;
  * @Description:
  */
 @Data
-public class AccGroupDTO {
+public class AccountingGroupDTO {
 
 	private Long id;
 	private Integer date;
