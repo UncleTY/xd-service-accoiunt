@@ -14,11 +14,14 @@ mybatis-plus:
   mapper-locations:
     - classpath:mapper/*.xml
 
+logging:
+  config: classpath:log4j2.xml
+
 files:
   upload:
 #    上传文件存放的位置
     path: D:/files/
-#    path: /home/files
+#    path: /home/files/
 
 
 feeType: 物业费|停车费

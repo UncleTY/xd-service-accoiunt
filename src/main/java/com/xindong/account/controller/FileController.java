@@ -25,6 +25,7 @@ import com.xindong.account.mapper.AccountingDetailMapper;
 import com.xindong.account.mapper.AccountingGroupMapper;
 import com.xindong.account.mapper.FileMapper;
 import com.xindong.account.utils.DateUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/file")
+@Slf4j
 public class FileController {
 
     @Value("${files.upload.path}")
@@ -130,7 +132,9 @@ public class FileController {
     @GetMapping("/{fileUUID}")
     public void download(@PathVariable String fileUUID, HttpServletResponse response) throws IOException {
         // 根据文件的唯一标识码获取文件
-        File uploadFile = new File(filePath + fileUUID);
+        String pathName = filePath + fileUUID;
+        log.info("文件路径：filePath={}", pathName);
+        File uploadFile = new File(pathName);
         // 设置输出流的格式
         ServletOutputStream os = response.getOutputStream();
         response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(uploadFile.getName(), "UTF-8"));
@@ -287,7 +291,7 @@ public class FileController {
         FileOutputStream fos = new FileOutputStream(filePath + fileName);
         workbook.write(fos);
         fos.close();
-        return Result.success(new CheckResultDTO("http://" + serverIp + ":8082/file/" + fileName, detailResultList));
+        return Result.success(new CheckResultDTO(fileName, detailResultList));
     }
 
     /**

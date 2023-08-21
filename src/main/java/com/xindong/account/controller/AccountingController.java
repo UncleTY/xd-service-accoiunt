@@ -132,7 +132,7 @@ public class AccountingController {
 		FileOutputStream fos = new FileOutputStream(filePath + fileName);
 		workbook.write(fos);
 		fos.close();
-		return Result.success(new SplitResultDTO("http://" + serverIp + ":8082/file/" + fileName, storeResult));
+		return Result.success(new SplitResultDTO(fileName, storeResult));
 	}
 
 	private SplitDetailDTO getSplitResult(String message) {
