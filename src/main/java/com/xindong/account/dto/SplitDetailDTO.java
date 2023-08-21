@@ -15,7 +15,7 @@ public class SplitDetailDTO implements Serializable {
 	private String originData;
 	@Excel(name = "信息")
 	private String message;
-	@Excel(name = "物业费")
+	@Excel(name = "费用类型")
 	private String feeType;
 	@Excel(name = "开始日期")
 	private String beginDate;

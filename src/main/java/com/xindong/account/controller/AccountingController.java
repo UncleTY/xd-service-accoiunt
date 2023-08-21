@@ -19,6 +19,7 @@ import com.xindong.account.entity.AccountingDetail;
 import com.xindong.account.entity.AccountingGroup;
 import com.xindong.account.mapper.AccountingDetailMapper;
 import com.xindong.account.mapper.AccountingGroupMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
@@ -45,9 +46,15 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/accounting")
+@Slf4j
 public class AccountingController {
 
-	private static final String PATTERN_FEE = "^已传?([\\s\\S]*)(物业费)(\\d*)-?(\\d*)$";
+	private static final String PATTERN_PREFIX = "^已报?([\\s\\S]*)";
+
+	private static String DATE_PATTERN = "(\\d{4}\\.\\d{1,2}\\.\\d{1,2})-?(\\d{4}\\.\\d{1,2}\\.\\d{1,2})$";
+
+	@Value(value = "${feeType:物业费}")
+	private String patternFee;
 
 	@Value("${files.upload.path}")
 	private String filePath;
@@ -108,9 +115,9 @@ public class AccountingController {
 		List<SplitDTO> filterList = Optional.ofNullable(list).orElse(Lists.newArrayList()).stream()
 				.filter(item -> StringUtils.isNotBlank(item.getData())).collect(Collectors.toList());
 		List<SplitDetailDTO> resultList = filterList.stream().map(item -> {
-					SplitDetailDTO splitResult = getSplitResult(item.getData());
-					return splitResult;
-				}).collect(Collectors.toList());
+			SplitDetailDTO splitResult = getSplitResult(item.getData());
+			return splitResult;
+		}).collect(Collectors.toList());
 		List<SplitDetailDTO> storeResult = AccountConverter.INSTANCE.toSplitDeatilList(resultList);
 		Workbook workbook = ExcelExportUtil.exportExcel(
 				new ExportParams(null, null, "处理结果"),
@@ -131,7 +138,9 @@ public class AccountingController {
 	private SplitDetailDTO getSplitResult(String message) {
 		SplitDetailDTO splitResult = new SplitDetailDTO();
 		splitResult.setOriginData(message);
-		Pattern pattern = Pattern.compile(PATTERN_FEE);
+		String regex = PATTERN_PREFIX + "(" + patternFee + ")" + DATE_PATTERN;
+		// log.info("regex={}", regex);
+		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(message);
 		if (matcher.find()) {
 			splitResult.setMessage(matcher.group(1));
