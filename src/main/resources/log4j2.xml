@@ -5,6 +5,8 @@
         <property name="console_log_pattern">%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</property>
         <property name="file_log_pattern">%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</property>
         <property name="every_file_size">20MB</property>
+        <!--<property name="file_location">home/logs</property>-->
+        <property name="file_location">logs</property>
     </Properties>
 
     <appenders>
@@ -13,8 +15,8 @@
             <PatternLayout pattern="${console_log_pattern}"/>
         </Console>
 
-        <RollingFile name="DEBUG" fileName="/home/xindong/logs/log4j2/debug.log"
-                     filePattern="/home/xindong/logs/log4j2/debug_log_archive/debug-%d{yyyy-MM-dd}-%i.log.zip">
+        <RollingFile name="DEBUG" fileName="${file_location}/debug.log"
+                     filePattern="${file_location}/debug_log_archive/debug-%d{yyyy-MM-dd}-%i.log.zip">
             <PatternLayout pattern="${file_log_pattern}"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="${every_file_size}"/>
@@ -24,8 +26,8 @@
             </Filters>
         </RollingFile>
 
-        <RollingFile name="INFO" fileName="/home/xindong/logs/log4j2/info.log"
-                     filePattern="/home/xindong/logs/log4j2/info_log_archive/info-%d{yyyy-MM-dd}-%i.log.zip">
+        <RollingFile name="INFO" fileName="${file_location}/info.log"
+                     filePattern="${file_location}/info_log_archive/info-%d{yyyy-MM-dd}-%i.log.zip">
             <PatternLayout pattern="${file_log_pattern}"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="${every_file_size}"/>
@@ -35,8 +37,8 @@
             </Filters>
         </RollingFile>
 
-        <RollingFile name="WARN" fileName="/home/xindong/logs/log4j2/warn.log"
-                     filePattern="/home/xindong/logs/log4j2/warn_log_archive/warn-%d{yyyy-MM-dd}-%i.log.zip">
+        <RollingFile name="WARN" fileName="${file_location}/warn.log"
+                     filePattern="${file_location}/warn_log_archive/warn-%d{yyyy-MM-dd}-%i.log.zip">
             <PatternLayout pattern="${file_log_pattern}"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="${every_file_size}"/>
@@ -46,8 +48,8 @@
             </Filters>
         </RollingFile>
 
-        <RollingFile name="ERROR" fileName="/home/xindong/logs/log4j2/error.log"
-                     filePattern="/home/xindong/logs/log4j2/error_log_archive/error-%d{yyyy-MM-dd}-%i.log.zip">
+        <RollingFile name="ERROR" fileName="${file_location}/error.log"
+                     filePattern="${file_location}/error_log_archive/error-%d{yyyy-MM-dd}-%i.log.zip">
             <PatternLayout pattern="${file_log_pattern}"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="${every_file_size}"/>
