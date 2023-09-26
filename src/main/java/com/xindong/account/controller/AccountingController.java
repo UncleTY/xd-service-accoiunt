@@ -49,9 +49,11 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AccountingController {
 
-	private static final String PATTERN_PREFIX = "^已报?([\\s\\S]*)";
+	private static final String PATTERN_PREFIX = "^(已报|收到)(.*?)\\((.*?)\\)*?";
 
-	private static String DATE_PATTERN = "(\\d{4}\\.\\d{1,2}\\.\\d{1,2})-?(\\d{4}\\.\\d{1,2}\\.\\d{1,2})$";
+	private static String DATE_PATTERN = "(\\d{4}\\.\\d{1,2}\\.\\d{1,2})-?(\\d{4}\\.\\d{1,2}\\.\\d{1,2})";
+
+	private static String TAX_PATTERN = "\\(发票号码:(\\d*)\\)$";
 
 	@Value(value = "${feeType:物业费}")
 	private String patternFee;
@@ -138,18 +140,24 @@ public class AccountingController {
 	private SplitDetailDTO getSplitResult(String message) {
 		SplitDetailDTO splitResult = new SplitDetailDTO();
 		splitResult.setOriginData(message);
-		String regex = PATTERN_PREFIX + "(" + patternFee + ")" + DATE_PATTERN;
+		String regex = PATTERN_PREFIX + "(" + patternFee + ")" + DATE_PATTERN + TAX_PATTERN;
 		// log.info("regex={}", regex);
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(message);
 		if (matcher.find()) {
-			splitResult.setMessage(matcher.group(1));
-			splitResult.setFeeType(matcher.group(2));
-			splitResult.setBeginDate(matcher.group(3));
-			splitResult.setEndDate(matcher.group(4));
-			if (StringUtils.isNotBlank(matcher.group(3)) && StringUtils.isNotBlank(matcher.group(4))) {
-				splitResult.setDateDuration(matcher.group(3) + "-" + matcher.group(4));
+			splitResult.setCompany(matcher.group(2));
+			splitResult.setAddress(matcher.group(3));
+			splitResult.setFeeType(matcher.group(4));
+			String beginDate = matcher.group(5);
+			String endDate = matcher.group(6);
+			if (StringUtils.isNotBlank(beginDate) && StringUtils.isNotBlank(endDate)) {
+				String beginDateNew = beginDate.replace(".", "-");
+				splitResult.setBeginDate(beginDateNew);
+				String endDateNew = endDate.replace(".", "-");
+				splitResult.setEndDate(endDateNew);
+				splitResult.setDateDuration(beginDateNew + " 至 " + endDateNew);
 			}
+			splitResult.setTaxNo(matcher.group(7));
 		}
 		return splitResult;
 	}

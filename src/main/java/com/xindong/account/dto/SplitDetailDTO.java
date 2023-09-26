@@ -13,8 +13,10 @@ import java.io.Serializable;
 public class SplitDetailDTO implements Serializable {
 	@Excel(name = "原始数据")
 	private String originData;
-	@Excel(name = "信息")
-	private String message;
+	@Excel(name = "公司")
+	private String company;
+	@Excel(name = "地址")
+	private String address;
 	@Excel(name = "费用类型")
 	private String feeType;
 	@Excel(name = "开始日期")
@@ -23,5 +25,6 @@ public class SplitDetailDTO implements Serializable {
 	private String endDate;
 	@Excel(name = "日期区间")
 	private String dateDuration;
-
+	@Excel(name = "发票号码")
+	private String taxNo;
 }
