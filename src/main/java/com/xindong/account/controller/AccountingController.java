@@ -140,6 +140,8 @@ public class AccountingController {
 	private SplitDetailDTO getSplitResult(String message) {
 		SplitDetailDTO splitResult = new SplitDetailDTO();
 		splitResult.setOriginData(message);
+		message = message.replaceAll("，", ",")
+				.replaceAll("（", "(").replaceAll("）", ")");
 		String regex = PATTERN_PREFIX + "(" + patternFee + ")" + DATE_PATTERN + TAX_PATTERN;
 		// log.info("regex={}", regex);
 		Pattern pattern = Pattern.compile(regex);
