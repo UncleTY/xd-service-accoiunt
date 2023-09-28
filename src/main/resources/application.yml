@@ -22,6 +22,3 @@ files:
 #    上传文件存放的位置
     path: D:/files/
 #    path: /home/files/
-
-
-feeType: 物业费|停车费

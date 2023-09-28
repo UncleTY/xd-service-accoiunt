@@ -49,14 +49,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AccountingController {
 
-	private static final String PATTERN_PREFIX = "^(已报|收到)(.*?)\\((.*?)\\)*?";
-
-	private static String DATE_PATTERN = "(\\d{4}\\.\\d{1,2}\\.\\d{1,2})-?(\\d{4}\\.\\d{1,2}\\.\\d{1,2})";
-
-	private static String TAX_PATTERN = "\\(发票号码:(\\d*)\\)$";
-
-	@Value(value = "${feeType:物业费}")
-	private String patternFee;
+	private static final String PATTERN_PREFIX = "^(已报|收到)(.*?)(物业费|停车费)?(\\d{4}\\.\\d{1,2}\\.\\d{1,2})-?(\\d{4}\\.\\d{1,2}\\.\\d{1,2})(\\(发票号码:(\\d*)\\))?";
 
 	@Value("${files.upload.path}")
 	private String filePath;
@@ -141,17 +134,25 @@ public class AccountingController {
 		SplitDetailDTO splitResult = new SplitDetailDTO();
 		splitResult.setOriginData(message);
 		message = message.replaceAll("，", ",")
-				.replaceAll("（", "(").replaceAll("）", ")");
-		String regex = PATTERN_PREFIX + "(" + patternFee + ")" + DATE_PATTERN + TAX_PATTERN;
-		// log.info("regex={}", regex);
+				.replaceAll("（", "(").replaceAll("）", ")")
+				.replaceAll("：", ":");
+		String regex = PATTERN_PREFIX;
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(message);
 		if (matcher.find()) {
-			splitResult.setCompany(matcher.group(2));
-			splitResult.setAddress(matcher.group(3));
-			splitResult.setFeeType(matcher.group(4));
-			String beginDate = matcher.group(5);
-			String endDate = matcher.group(6);
+			String context = matcher.group(2);
+			if (context.endsWith(")")) {
+				int i = context.lastIndexOf("(");
+				splitResult.setCompany(context.substring(0, i));
+				splitResult.setAddress(context.substring(i + 1, context.length() - 1));
+			} else {
+				splitResult.setCompany(context);
+				splitResult.setAddress(StringUtils.EMPTY);
+			}
+
+			splitResult.setFeeType(matcher.group(3));
+			String beginDate = matcher.group(4);
+			String endDate = matcher.group(5);
 			if (StringUtils.isNotBlank(beginDate) && StringUtils.isNotBlank(endDate)) {
 				String beginDateNew = beginDate.replace(".", "-");
 				splitResult.setBeginDate(beginDateNew);
